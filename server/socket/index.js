@@ -1,4 +1,4 @@
-const express = require('express')
+const express = require('express')  
 const { Server } = require('socket.io')
 const http  = require('http')
 const getUserDetailsFromToken = require('../helpers/getUserDetailsFromToken')
@@ -12,7 +12,8 @@ const app = express()
 const server = http.createServer(app)
 const io = new Server(server,{
     cors : {
-        origin : process.env.FRONTEND_URL,
+        origin : 'http://localhost:3000',
+        methods: ['GET', 'POST'],
         credentials : true
     }
 })
@@ -32,11 +33,22 @@ io.on('connection',async(socket)=>{
     //current user details 
     const user = await getUserDetailsFromToken(token)
 
-    //create a room
-    socket.join(user?._id.toString())
-    onlineUser.add(user?._id?.toString())
+    if (user.message === 'session out' || user.logout) {
+        socket.disconnect();
+        return;
+    }
 
-    io.emit('onlineUser',Array.from(onlineUser))
+    if (!user || !user._id) {
+        console.error('User or user._id is undefined');
+        socket.disconnect();
+        return;
+    }
+        
+    socket.join(user._id.toString());
+    onlineUser.add(user._id.toString());
+
+    io.emit('onlineUser', Array.from(onlineUser));  
+
 
     socket.on('message-page',async(userId)=>{
         console.log('userId',userId)
