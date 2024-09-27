@@ -113,7 +113,7 @@ const MessagePage = () => {
   },[socketConnection,params?.userId,user])
 
   const handleOnChange = (e)=>{
-    const { name, value} = e.target
+    const {value} = e.target
 
     setMessage(preve => {
       return{
@@ -193,6 +193,7 @@ const MessagePage = () => {
                               {
                                 msg?.imageUrl && (
                                   <img 
+                                    alt=""
                                     src={msg?.imageUrl}
                                     className='w-full h-full object-scale-down'
                                   />

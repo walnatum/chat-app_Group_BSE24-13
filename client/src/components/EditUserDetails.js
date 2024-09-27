@@ -1,6 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
-import Avatar from './Avatar'
-import uploadFile from '../helpers/uploadFile'
+import React, { useEffect, useState } from 'react'
 import Divider from './Divider'
 import axios from 'axios'
 import taost from 'react-hot-toast'
@@ -12,9 +10,8 @@ const EditUserDetails = ({onClose,user}) => {
     const [data,setData] = useState({
         
         name : user?.user,
-        profile_pic : user?.profile_pic
     })
-    const uploadPhotoRef = useRef()
+
     const dispatch = useDispatch()
 
     useEffect(()=>{
@@ -34,25 +31,6 @@ const EditUserDetails = ({onClose,user}) => {
                 ...preve,
                 [name] : value
             }
-        })
-    }
-
-    const handleOpenUploadPhoto = (e)=>{
-        e.preventDefault()
-        e.stopPropagation()
-
-        uploadPhotoRef.current.click()
-    }
-    const handleUploadPhoto = async(e)=>{
-        const file = e.target.files[0]
-
-        const uploadPhoto = await uploadFile(file)
-
-        setData((preve)=>{
-        return{
-            ...preve,
-            profile_pic : uploadPhoto?.url
-        }
         })
     }
 
@@ -101,27 +79,7 @@ const EditUserDetails = ({onClose,user}) => {
                     />
                 </div>
 
-                <div>
-                    <div>Photo:</div>
-                    <div className='my-1 flex items-center gap-4'>
-                        <Avatar
-                            width={40}
-                            height={40}
-                            imageUrl={data?.profile_pic}
-                            name={data?.name}
-                        />
-                        <label htmlFor='profile_pic'>
-                        <button className='font-semibold' onClick={handleOpenUploadPhoto}>Change Photo</button>
-                        <input
-                            type='file'
-                            id='profile_pic'
-                            className='hidden'
-                            onChange={handleUploadPhoto}
-                            ref={uploadPhotoRef}
-                        />
-                        </label>
-                    </div>
-                </div>
+          
 
                 <Divider/>    
                 <div className='flex gap-2 w-fit ml-auto '>
