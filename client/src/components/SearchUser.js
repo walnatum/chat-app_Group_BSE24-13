@@ -29,8 +29,8 @@ const SearchUser = ({onClose}) => {
     }
 
     useEffect(()=>{
-        handleSearchUser()
-    },[search])
+        handleSearchUser();
+    },[handleSearchUser])
 
     console.log("searchUser",searchUser)
   return (

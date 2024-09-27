@@ -36,7 +36,7 @@ const Home = () => {
 
   useEffect(()=>{
     fetchUserDetails()
-  },[])
+  },[fetchUserDetails])
 
   /***socket connection */
   useEffect(()=>{
@@ -56,7 +56,7 @@ const Home = () => {
     return ()=>{
       socketConnection.disconnect()
     }
-  },[])
+  },[dispatch])
 
 
   const basePath = location.pathname === '/'

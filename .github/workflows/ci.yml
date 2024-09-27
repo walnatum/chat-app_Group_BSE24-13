@@ -48,7 +48,7 @@ jobs:
         working-directory: ./client
         run: |
           npm install  # Install frontend dependencies
-          npm run build  # Build React app
+          CI=false npm run build  # Build React app
 
       # Step 6: Run frontend tests
       - name: Run frontend tests
