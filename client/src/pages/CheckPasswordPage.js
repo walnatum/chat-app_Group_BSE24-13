@@ -4,7 +4,7 @@ import axios from 'axios'
 import toast from 'react-hot-toast';
 import Avatar from '../components/Avatar';
 import { useDispatch } from 'react-redux';
-import { setToken, setUser } from '../redux/userSlice';
+import { setToken} from '../redux/userSlice';
 
 const CheckPasswordPage = () => {
   const [data,setData] = useState({
