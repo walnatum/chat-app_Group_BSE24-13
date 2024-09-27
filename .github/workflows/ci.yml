@@ -1,6 +1,5 @@
 name: Chat app CI
 
-# Trigger the workflow on push or pull request to main branch
 on:
   push:
     branches:
@@ -15,20 +14,17 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [15.14.0]  # Set the version of Node.js for both frontend and backend
+        node-version: [16]
 
     steps:
-      # Step 1: Check out the repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js (used for both client and server)
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
-      # Step 3: Build and test the backend (server)
       - name: Install and build backend (server)
         working-directory: ./server
         run: |
@@ -36,21 +32,17 @@ jobs:
           npm run start &  # Start backend server (for tests)
           sleep 5  # Give server time to spin up 
       
-      # Step 4: Run backend tests
       - name: Run backend tests
         working-directory: ./server
         run: |
           echo "No backend tests defined, but can be added here!" 
           # npm test  # Uncomment when backend tests are available
 
-      # Step 5: Build frontend (client)
       - name: Install and build frontend (client)
         working-directory: ./client
         run: |
-          npm install  # Install frontend dependencies
-          CI=false npm run build  # Build React app
-
-      # Step 6: Run frontend tests
+          npm install
+          CI=false npm run build 
       - name: Run frontend tests
         working-directory: ./client
         run: |
