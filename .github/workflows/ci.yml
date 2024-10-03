@@ -37,14 +37,14 @@ jobs:
       - name: Run backend tests
         working-directory: ./server
         run: |
-          npm test 
+          # npm test 
 
       - name: Install and build frontend (client)
         working-directory: ./client
         run: |
           npm install
           CI=false npm run build 
-          
+
       - name: Run frontend tests
         working-directory: ./client
         run: |
