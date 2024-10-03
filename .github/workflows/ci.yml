@@ -3,9 +3,11 @@ name: Chat app CI
 on:
   push:
     branches:
+      - develop
       - master
   pull_request:
     branches:
+      - develop
       - master
 
 jobs:
@@ -42,6 +44,7 @@ jobs:
         run: |
           npm install
           CI=false npm run build 
+          
       - name: Run frontend tests
         working-directory: ./client
         run: |
