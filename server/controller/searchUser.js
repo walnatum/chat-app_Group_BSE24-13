@@ -1,20 +1,17 @@
-const UserModel = require('../models/UserModel');
+const UserModel = require("../models/UserModel");
 
 async function searchUser(request, response) {
   try {
     const { search } = request.body;
 
-    const query = new RegExp(search, 'i', 'g');
+    const query = new RegExp(search, "i", "g");
 
     const user = await UserModel.find({
-      $or: [
-        { name: query },
-        { email: query },
-      ],
-    }).select('-password');
+      $or: [{ name: query }, { email: query }],
+    }).select("-password");
 
     return response.json({
-      message: 'all user',
+      message: "all user",
       data: user,
       success: true,
     });

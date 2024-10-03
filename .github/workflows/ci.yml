@@ -29,14 +29,13 @@ jobs:
         working-directory: ./server
         run: |
           npm install  # Install backend dependencies
-          npm run start &  # Start backend server (for tests)
-          sleep 5  # Give server time to spin up 
+          npm run start &  
+          sleep 5  #
       
       - name: Run backend tests
         working-directory: ./server
         run: |
-          echo "No backend tests defined, but can be added here!" 
-          # npm test  # Uncomment when backend tests are available
+          npm test 
 
       - name: Install and build frontend (client)
         working-directory: ./client
@@ -48,15 +47,14 @@ jobs:
         run: |
           npm test -- --watchAll=false  # Run React tests in non-interactive mode
 
-      # Step 7: Lint the backend 
-      #- name: Lint backend code
-        #working-directory: ./server
-        #run: |
-        #  npx eslint . || echo "No ESLint config for server. Skipping linting step."
-
-      # Step 8: Lint the frontend 
-      - name: Lint frontend code
+      - name: Run Prettier on backend code
+        working-directory: ./server
+        run: |
+          npx prettier --check "**/*.js"  # Check formatting for backend files
+  
+      - name: Run Prettier on frontend code
         working-directory: ./client
         run: |
-          npx eslint . || echo "No ESLint config for client. Skipping linting step."
-
+          npx prettier --check "**/*.js"  # Check formatting for frontend files
+  
+  
