@@ -1,5 +1,5 @@
-const bcryptjs = require('bcryptjs');
-const UserModel = require('../models/UserModel');
+const bcryptjs = require("bcryptjs");
+const UserModel = require("../models/UserModel");
 
 async function registerUser(request, response) {
   try {
@@ -9,7 +9,7 @@ async function registerUser(request, response) {
 
     if (checkEmail) {
       return response.status(400).json({
-        message: 'Already user exits',
+        message: "Already user exits",
         error: true,
       });
     }
@@ -28,7 +28,7 @@ async function registerUser(request, response) {
     const userSave = await user.save();
 
     return response.status(201).json({
-      message: 'User created successfully',
+      message: "User created successfully",
       data: userSave,
       success: true,
     });

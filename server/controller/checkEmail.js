@@ -1,20 +1,20 @@
-const UserModel = require('../models/UserModel');
+const UserModel = require("../models/UserModel");
 
 async function checkEmail(request, response) {
   try {
     const { email } = request.body;
 
-    const checkEmail = await UserModel.findOne({ email }).select('-password');
+    const checkEmail = await UserModel.findOne({ email }).select("-password");
 
     if (!checkEmail) {
       return response.status(400).json({
-        message: 'user not exit',
+        message: "user not exit",
         error: true,
       });
     }
 
     return response.status(200).json({
-      message: 'email verify',
+      message: "email verify",
       success: true,
       data: checkEmail,
     });

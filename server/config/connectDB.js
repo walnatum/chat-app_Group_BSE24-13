@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 async function connectDB() {
   try {
@@ -6,15 +6,15 @@ async function connectDB() {
 
     const { connection } = mongoose;
 
-    connection.on('connected', () => {
-      console.log('Connect to DB');
+    connection.on("connected", () => {
+      console.log("Connect to DB");
     });
 
-    connection.on('error', (error) => {
-      console.log('Something is wrong in mongodb ', error);
+    connection.on("error", (error) => {
+      console.log("Something is wrong in mongodb ", error);
     });
   } catch (error) {
-    console.log('Something is wrong ', error);
+    console.log("Something is wrong ", error);
   }
 }
 
