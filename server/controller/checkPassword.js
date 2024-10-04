@@ -18,6 +18,7 @@ async function checkPassword(request, response) {
     }
 
     const tokenData = {
+      // eslint-disable-next-line no-underscore-dangle
       id: user._id,
       email: user.email,
     };
