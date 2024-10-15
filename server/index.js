@@ -6,17 +6,18 @@ const connectDB = require("./config/connectDB");
 const router = require("./routes/index");
 const { app, server } = require("./socket/index");
 
-// const app = express()
+const env = process.env.NODE_ENV || "STAGING";
+
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env[`FRONTEND_URL_${env}`],
     credentials: true,
   }),
 );
 app.use(express.json());
 app.use(cookiesParser());
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.SERVER_PORT;
 
 app.get("/", (request, response) => {
   response.json({
