@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Avatar from "../components/Avatar";
 import { useDispatch } from "react-redux";
 import { setToken } from "../redux/userSlice";
+
 
 const CheckPasswordPage = () => {
   const [data, setData] = useState({
@@ -15,21 +16,24 @@ const CheckPasswordPage = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
+  // Extract location.state.name to a separate variable
+  const locationStateName = location.state?.name;
+
+  // Use the extracted variable in useMemo
+  const userName = useMemo(() => locationStateName, [locationStateName]);
+
   useEffect(() => {
-    if (!location?.state?.name) {
+    if (!userName) {
       navigate("/email");
     }
-  }, [location?.state?.name, navigate]);
+  }, [userName, navigate]);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-
-    setData((preve) => {
-      return {
-        ...preve,
-        [name]: value,
-      };
-    });
+    setData((preve) => ({
+      ...preve,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -54,10 +58,7 @@ const CheckPasswordPage = () => {
       if (response.data.success) {
         dispatch(setToken(response?.data?.token));
         localStorage.setItem("token", response?.data?.token);
-
-        setData({
-          password: "",
-        });
+        setData({ password: "" });
         navigate("/");
       }
     } catch (error) {
@@ -75,11 +76,11 @@ const CheckPasswordPage = () => {
           <Avatar
             width={70}
             height={70}
-            name={location?.state?.name}
+            name={locationStateName}
             imageUrl={location?.state?.profile_pic}
           />
           <h2 className="font-semibold text-lg mt-1">
-            {location?.state?.name}
+            {locationStateName}
           </h2>
         </div>
 

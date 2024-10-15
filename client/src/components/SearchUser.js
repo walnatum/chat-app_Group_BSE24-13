@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback  } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import Loading from "./Loading";
 import UserSearchCard from "./UserSearchCard";
@@ -11,7 +11,7 @@ const SearchUser = ({ onClose }) => {
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
 
-  const handleSearchUser = async () => {
+  const handleSearchUser = useCallback(async () => {
     const URL = `${process.env.REACT_APP_BACKEND_URL}/api/search-user`;
     try {
       setLoading(true);
@@ -24,7 +24,7 @@ const SearchUser = ({ onClose }) => {
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
-  };
+  }, [search]);
 
   useEffect(() => {
     handleSearchUser();

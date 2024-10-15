@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import Avatar from "./Avatar";
@@ -45,6 +45,28 @@ const MessagePage = () => {
       });
     }
   }, [allMessage]);
+
+  const handleSendMessage = useCallback((e) => {
+    e.preventDefault();
+
+    if (message.text || message.imageUrl || message.videoUrl) {
+      if (socketConnection) {
+        socketConnection.emit("new message", {
+          sender: user?._id,
+          receiver: params.userId,
+          text: message.text,
+          imageUrl: message.imageUrl,
+          videoUrl: message.videoUrl,
+          msgByUserId: user?._id,
+        });
+        setMessage({
+          text: "",
+          imageUrl: "",
+          videoUrl: "",
+        });
+      }
+    }
+  }, [socketConnection, user, params.userId, message]);
 
   const handleUploadImageVideoOpen = () => {
     setOpenImageVideoUpload((preve) => !preve);
@@ -113,7 +135,7 @@ const MessagePage = () => {
         setAllMessage(data);
       });
     }
-  }, [socketConnection, params?.userId, user]);
+  }, [socketConnection, params.userId, user, handleSendMessage]);
 
   const handleOnChange = (e) => {
     const { value } = e.target;
@@ -124,28 +146,6 @@ const MessagePage = () => {
         text: value,
       };
     });
-  };
-
-  const handleSendMessage = (e) => {
-    e.preventDefault();
-
-    if (message.text || message.imageUrl || message.videoUrl) {
-      if (socketConnection) {
-        socketConnection.emit("new message", {
-          sender: user?._id,
-          receiver: params.userId,
-          text: message.text,
-          imageUrl: message.imageUrl,
-          videoUrl: message.videoUrl,
-          msgByUserId: user?._id,
-        });
-        setMessage({
-          text: "",
-          imageUrl: "",
-          videoUrl: "",
-        });
-      }
-    }
   };
 
   return (

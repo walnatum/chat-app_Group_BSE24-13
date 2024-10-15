@@ -10,7 +10,4 @@ module.exports = {
     },
   },
   plugins: [],
-  options: {
-    map: false,
-  },
 };
