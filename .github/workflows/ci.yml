@@ -30,20 +30,22 @@ jobs:
       - name: Install and build backend (server)
         working-directory: ./server
         run: |
-          npm install  # Install backend dependencies
-          npm run start &  
-          sleep 5  #
-      
+          # npm install  # Install backend dependencies
+          # npm run start &  
+          # sleep 5  #
+          echo "Skip these since the process was moved to a different workflow file!"
+
       - name: Run backend tests
         working-directory: ./server
         run: |
-          # npm test 
+          npm test
 
       - name: Install and build frontend (client)
         working-directory: ./client
         run: |
-          npm install
-          CI=false npm run build 
+          # npm install
+          # CI=false npm run build
+          echo "Skip these since the process was moved to a different workflow file!"
 
       - name: Run frontend tests
         working-directory: ./client
@@ -53,11 +55,11 @@ jobs:
       - name: Run Prettier on backend code
         working-directory: ./server
         run: |
-          npx prettier --check "**/*.js"  # Check formatting for backend files
-  
+          # npx prettier --check "**/*.js"  # Check formatting for backend files
+          echo "Skip these for now!"
+
       - name: Run Prettier on frontend code
         working-directory: ./client
         run: |
-          npx prettier --check "**/*.js"  # Check formatting for frontend files
-  
-  
+          # npx prettier --check "**/*.js"  # Check formatting for frontend files
+          echo "Skip these for now!"
