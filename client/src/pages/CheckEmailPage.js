@@ -24,8 +24,9 @@ const CheckEmailPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-
-    const URL = `${process.env.REACT_APP_BACKEND_URL}/api/email`;
+    
+    const env = process.env.NODE_ENV || "STAGING";
+    const URL = `${process.env[`REACT_APP_BACKEND_URL_${env}`]}/api/email`;
 
     try {
       const response = await axios.post(URL, data);

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect , useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -12,6 +12,8 @@ import Sidebar from "../components/Sidebar";
 import logo from "../assets/logo.png";
 import io from "socket.io-client";
 
+const env = process.env.NODE_ENV || "STAGING"
+;
 const Home = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -21,7 +23,7 @@ const Home = () => {
   console.log("user", user);
   const fetchUserDetails = useCallback(async () => {
     try {
-      const URL = `${process.env.REACT_APP_BACKEND_URL}/api/user-details`;
+      const URL = `${process.env[`REACT_APP_BACKEND_URL_${env}`]}/api/user-details`;
       const response = await axios({
         url: URL,
         withCredentials: true,
@@ -45,7 +47,7 @@ const Home = () => {
 
   /***socket connection */
   useEffect(() => {
-    const socketConnection = io(process.env.REACT_APP_BACKEND_URL, {
+    const socketConnection = io(process.env[`REACT_APP_BACKEND_URL_${env}`], {
       auth: {
         token: localStorage.getItem("token"),
       },

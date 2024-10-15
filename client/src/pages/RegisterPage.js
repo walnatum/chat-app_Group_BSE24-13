@@ -27,7 +27,8 @@ const RegisterPage = () => {
     e.preventDefault();
     e.stopPropagation();
 
-    const URL = `${process.env.REACT_APP_BACKEND_URL}/api/register`;
+    const env = process.env.NODE_ENV || "STAGING";
+    const URL = `${process.env[`REACT_APP_BACKEND_URL_${env}`]}/api/register`;
 
     try {
       const response = await axios.post(URL, data);
