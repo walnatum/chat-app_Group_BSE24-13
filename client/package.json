@@ -20,7 +20,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider NODE_ENV=PROD react-scripts start",
+    "start-dev": "NODE_OPTIONS=--openssl-legacy-provider NODE_ENV=STAGING react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --passWithNoTests",
     "eject": "react-scripts eject"

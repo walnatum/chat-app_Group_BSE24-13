@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 
+const env = process.env.NODE_ENV || "STAGING";
+
 async function connectDB() {
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(process.env[`MONGODB_URI_${env}`]);
 
     const { connection } = mongoose;
 
