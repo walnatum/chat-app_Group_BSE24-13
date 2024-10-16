@@ -2,7 +2,6 @@ const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/UserModel");
 
-const env = process.env.NODE_ENV || "STAGING";
 
 async function checkPassword(request, response) {
   try {

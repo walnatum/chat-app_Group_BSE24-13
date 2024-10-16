@@ -6,7 +6,6 @@ const connectDB = require("./config/connectDB");
 const router = require("./routes/index");
 const { app, server } = require("./socket/index");
 
-const env = process.env.NODE_ENV || "STAGING";
 
 app.use(cors());
 

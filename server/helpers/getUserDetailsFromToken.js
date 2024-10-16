@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/UserModel");
 
-const env = process.env.NODE_ENV || "STAGING";
 
 const getUserDetailsFromToken = async (token) => {
   if (!token) {

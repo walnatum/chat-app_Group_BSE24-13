@@ -71,3 +71,7 @@ jobs:
           app-name: 'chat-app-server-staging'
           slot-name: 'Production'
           package: .
+          app-settings: |
+            MONGODB_URI='${{ secrets.MONGODB_URI_STAGING }}'
+            JWT_SECRET_KEY='${{ secrets.JWT_SECRET_KEY_STAGING }}'
+            FRONTEND_URL='${{ secrets.FRONTEND_URL_STAGING }}'

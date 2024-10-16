@@ -12,8 +12,6 @@ import Sidebar from "../components/Sidebar";
 import logo from "../assets/logo.png";
 import io from "socket.io-client";
 
-const env = process.env.NODE_ENV || "STAGING"
-const baseUrl = 'https://chat-app-server-staging-bfgwewfsfubsb9et.westeurope-01.azurewebsites.net'
 
 const Home = () => {
   const user = useSelector((state) => state.user);
@@ -24,7 +22,7 @@ const Home = () => {
   console.log("user", user);
   const fetchUserDetails = useCallback(async () => {
     try {
-      const URL = `${baseUrl}/api/user-details`;
+      const URL = `${process.env.REACT_APP_BACKEND_URL}/api/user-details`;
       const response = await axios({
         url: URL,
         withCredentials: true,
@@ -48,7 +46,7 @@ const Home = () => {
 
   /***socket connection */
   useEffect(() => {
-    const socketConnection = io(baseUrl, {
+    const socketConnection = io(process.env.REACT_APP_BACKEND_URL, {
       auth: {
         token: localStorage.getItem("token"),
       },
