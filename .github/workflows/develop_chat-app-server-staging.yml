@@ -73,6 +73,6 @@ jobs:
           FRONTEND_URL: ${{ secrets.FRONTEND_URL_STAGING }}
         with:
           app-name: 'chat-app-server-staging'
-          slot-name: 'Staging'
+          slot-name: 'Production'
           package: .
   
