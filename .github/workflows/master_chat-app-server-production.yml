@@ -67,6 +67,11 @@ jobs:
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
+        env: 
+          # for these first two, we are using the same as in staging for the sake of time
+          MONGODB_URI: ${{ secrets.MONGODB_URI_STAGING }}
+          JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY_STAGING }}
+          FRONTEND_URL: ${{ secrets.FRONTEND_URL_PRODUCTION }}
         with:
           app-name: 'chat-app-server-production'
           slot-name: 'Production'
