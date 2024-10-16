@@ -24,4 +24,4 @@ root.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 
-console.log("env:", process.env)
+console.log("env:", process.env.REACT_APP_BACKEND_URL)
