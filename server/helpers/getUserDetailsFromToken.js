@@ -1,28 +1,30 @@
-const jwt = require('jsonwebtoken');
-const UserModel = require('../models/UserModel');
+const jwt = require("jsonwebtoken");
+const UserModel = require("../models/UserModel");
+
+const env = process.env.NODE_ENV || "STAGING";
 
 const getUserDetailsFromToken = async (token) => {
   if (!token) {
     return {
-      message: 'session out',
+      message: "session out",
       logout: true,
     };
   }
 
   try {
-    const decode = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    const user = await UserModel.findById(decode.id).select('-password');
+    const decode = jwt.verify(token, process.env[`JWT_SECRET_KEY_${env}`]);
+    const user = await UserModel.findById(decode.id).select("-password");
     if (!user) {
       return {
-        message: 'User not found',
+        message: "User not found",
         logout: true,
       };
     }
     return user;
   } catch (error) {
-    console.error('Error verifying token:', error);
+    console.error("Error verifying token:", error);
     return {
-      message: 'Invalid token',
+      message: "Invalid token",
       logout: true,
     };
   }

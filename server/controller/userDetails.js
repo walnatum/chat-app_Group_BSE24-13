@@ -1,13 +1,13 @@
-const getUserDetailsFromToken = require('../helpers/getUserDetailsFromToken');
+const getUserDetailsFromToken = require("../helpers/getUserDetailsFromToken");
 
 async function userDetails(request, response) {
   try {
-    const token = request.cookies.token || '';
+    const token = request.cookies.token || "";
 
     const user = await getUserDetailsFromToken(token);
 
     return response.status(200).json({
-      message: 'user details',
+      message: "user details",
       data: user,
     });
   } catch (error) {

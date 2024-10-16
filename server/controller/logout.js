@@ -3,11 +3,11 @@ async function logout(request, response) {
     const cookieOptions = {
       http: true,
       secure: true,
-      sameSite: 'None',
+      sameSite: "None",
     };
 
-    return response.cookie('token', '', cookieOptions).status(200).json({
-      message: 'session out',
+    return response.cookie("token", "", cookieOptions).status(200).json({
+      message: "session out",
       success: true,
     });
   } catch (error) {
