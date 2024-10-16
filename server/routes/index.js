@@ -10,7 +10,12 @@ const searchUser = require("../controller/searchUser");
 const app = express();
 const cors = require("cors");
 
-app.use(cors());
+app.use(cors(
+    {
+      origin: process.env.FRONTEND_URL,
+      credentials: true,
+    },
+  ));
 
 const router = express.Router();
 
