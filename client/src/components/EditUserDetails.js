@@ -36,12 +36,7 @@ const EditUserDetails = ({ onClose, user }) => {
     e.preventDefault();
     e.stopPropagation();
     try {
-      const env = process.env.NODE_ENV || "STAGING";
-
-      // TODO; change this to use env variables instead!
-      const baseUrl = 'https://chat-app-server-staging-bfgwewfsfubsb9et.westeurope-01.azurewebsites.net'
-      // const baseUrl = process.env[`REACT_APP_BACKEND_URL_${env}`] || 'https://chat-app-server-staging-bfgwewfsfubsb9et.westeurope-01.azurewebsites.net/'
-      const URL = `${baseUrl}/api/update-user`;
+      const URL = `${process.env.REACT_APP_BACKEND_URL}/api/update-user`;
 
       const response = await axios({
         method: "post",

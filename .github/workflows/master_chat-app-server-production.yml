@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - chat-app-server-production
+name: chat-app-server-production
 
 on:
   push:
@@ -23,12 +23,15 @@ jobs:
 
       - name: npm install, build, and test
         run: |
+          cd server
           npm install
           npm run build --if-present
           npm run test --if-present
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+        run: | 
+          cd server
+          zip -r ../release.zip ./*
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -64,6 +67,11 @@ jobs:
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
+        env: 
+          # for these first two, we are using the same as in staging for the sake of time
+          MONGODB_URI: ${{ secrets.MONGODB_URI_STAGING }}
+          JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY_STAGING }}
+          FRONTEND_URL: ${{ secrets.FRONTEND_URL_PRODUCTION }}
         with:
           app-name: 'chat-app-server-production'
           slot-name: 'Production'

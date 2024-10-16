@@ -2,7 +2,6 @@ const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/UserModel");
 
-const env = process.env.NODE_ENV || "STAGING";
 
 async function checkPassword(request, response) {
   try {
@@ -25,7 +24,7 @@ async function checkPassword(request, response) {
       email: user.email,
     };
 
-    const token = await jwt.sign(tokenData, process.env[`JWT_SECRET_KEY_${env}`], {
+    const token = await jwt.sign(tokenData, process.env.JWT_SECRET_KEY, {
       expiresIn: "1d",
     });
 

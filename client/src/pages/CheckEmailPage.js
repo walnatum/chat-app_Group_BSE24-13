@@ -25,9 +25,7 @@ const CheckEmailPage = () => {
     e.preventDefault();
     e.stopPropagation();
     
-    const env = process.env.NODE_ENV || "STAGING";
-    const baseUrl = 'https://chat-app-server-staging-bfgwewfsfubsb9et.westeurope-01.azurewebsites.net'
-    const URL = `${baseUrl}/api/email`;
+    const URL = `${process.env.REACT_APP_BACKEND_URL}/api/email`;
 
     try {
       const response = await axios.post(URL, data);

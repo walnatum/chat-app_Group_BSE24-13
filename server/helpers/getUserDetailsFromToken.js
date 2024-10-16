@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/UserModel");
 
-const env = process.env.NODE_ENV || "STAGING";
 
 const getUserDetailsFromToken = async (token) => {
   if (!token) {
@@ -12,7 +11,7 @@ const getUserDetailsFromToken = async (token) => {
   }
 
   try {
-    const decode = jwt.verify(token, process.env[`JWT_SECRET_KEY_${env}`]);
+    const decode = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const user = await UserModel.findById(decode.id).select("-password");
     if (!user) {
       return {
