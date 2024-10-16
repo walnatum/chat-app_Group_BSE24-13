@@ -10,12 +10,7 @@ const searchUser = require("../controller/searchUser");
 const app = express();
 const cors = require("cors");
 
-app.use(
-  cors({
-    origin: ['http://localhost:3000', 'https://agreeable-coast-0a724d403.5.azurestaticapps.net/'],
-    credentials: true,
-  }),
-);
+app.use(cors());
 
 const router = express.Router();
 

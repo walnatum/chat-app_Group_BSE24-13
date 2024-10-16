@@ -14,11 +14,7 @@ const app = express();
 /** *socket connection */
 const server = http.createServer(app);
 const io = new Server(server, {
-  cors: {
-    origin: ['http://localhost:3000', 'https://agreeable-coast-0a724d403.5.azurestaticapps.net/'],
-    methods: ["GET", "POST"],
-    credentials: true,
-  },
+  cors: {},
 });
 
 /** *

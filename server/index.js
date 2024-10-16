@@ -8,12 +8,8 @@ const { app, server } = require("./socket/index");
 
 const env = process.env.NODE_ENV || "STAGING";
 
-app.use(
-  cors({
-    origin: ['http://localhost:3000', 'https://agreeable-coast-0a724d403.5.azurestaticapps.net/'],
-    credentials: true,
-  }),
-);
+app.use(cors());
+
 app.use(express.json());
 app.use(cookiesParser());
 
