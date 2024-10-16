@@ -13,7 +13,8 @@ import logo from "../assets/logo.png";
 import io from "socket.io-client";
 
 const env = process.env.NODE_ENV || "STAGING"
-;
+const baseUrl = 'https://chat-app-server-staging-bfgwewfsfubsb9et.westeurope-01.azurewebsites.net'
+
 const Home = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const Home = () => {
   console.log("user", user);
   const fetchUserDetails = useCallback(async () => {
     try {
-      const URL = `${process.env[`REACT_APP_BACKEND_URL_${env}`]}/api/user-details`;
+      const URL = `${baseUrl}/api/user-details`;
       const response = await axios({
         url: URL,
         withCredentials: true,
@@ -47,7 +48,7 @@ const Home = () => {
 
   /***socket connection */
   useEffect(() => {
-    const socketConnection = io(process.env[`REACT_APP_BACKEND_URL_${env}`], {
+    const socketConnection = io(baseUrl, {
       auth: {
         token: localStorage.getItem("token"),
       },

@@ -41,7 +41,8 @@ const CheckPasswordPage = () => {
     e.stopPropagation();
 
     const env = process.env.NODE_ENV || "STAGING";
-    const URL = `${process.env[`REACT_APP_BACKEND_URL_${env}`]}/api/password`;
+    const baseUrl = 'https://chat-app-server-staging-bfgwewfsfubsb9et.westeurope-01.azurewebsites.net'
+    const URL = `${baseUrl}/api/password`;
 
     try {
       const response = await axios({

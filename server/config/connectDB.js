@@ -4,7 +4,9 @@ const env = process.env.NODE_ENV || "STAGING";
 
 async function connectDB() {
   try {
-    await mongoose.connect(process.env[`MONGODB_URI_${env}`]);
+    // change this to use env variables too!
+    const URI = 'mongodb+srv://nangosha:x65zN1KDQqjePQ8F@chat-app-staging.latgo.mongodb.net/?retryWrites=true&w=majority&appName=chat-app-staging'
+    await mongoose.connect(URI);
 
     const { connection } = mongoose;
 

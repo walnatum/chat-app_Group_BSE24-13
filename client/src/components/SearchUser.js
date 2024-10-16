@@ -13,7 +13,8 @@ const SearchUser = ({ onClose }) => {
 
   const handleSearchUser = useCallback(async () => {
     const env = process.env.NODE_ENV || "STAGING";
-    const URL = `${process.env[`REACT_APP_BACKEND_URL_${env}`]}/api/search-user`;
+    const baseUrl = 'https://chat-app-server-staging-bfgwewfsfubsb9et.westeurope-01.azurewebsites.net'
+    const URL = `${baseUrl}/api/search-user`;
     try {
       setLoading(true);
       const response = await axios.post(URL, {

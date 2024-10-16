@@ -10,7 +10,7 @@ const env = process.env.NODE_ENV || "STAGING";
 
 app.use(
   cors({
-    origin: process.env[`FRONTEND_URL_${env}`],
+    origin: '*',
     credentials: true,
   }),
 );

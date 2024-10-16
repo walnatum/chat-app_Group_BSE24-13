@@ -28,7 +28,8 @@ const RegisterPage = () => {
     e.stopPropagation();
 
     const env = process.env.NODE_ENV || "STAGING";
-    const URL = `${process.env[`REACT_APP_BACKEND_URL_${env}`]}/api/register`;
+    const baseUrl = 'https://chat-app-server-staging-bfgwewfsfubsb9et.westeurope-01.azurewebsites.net'
+    const URL = `${baseUrl}/api/register`;
 
     try {
       const response = await axios.post(URL, data);
