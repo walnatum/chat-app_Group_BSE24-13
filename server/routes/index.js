@@ -12,7 +12,7 @@ const cors = require("cors");
 
 app.use(
   cors({
-    origin: '*',
+    origin: ['http://localhost:3000', 'https://agreeable-coast-0a724d403.5.azurestaticapps.net/'],
     credentials: true,
   }),
 );
