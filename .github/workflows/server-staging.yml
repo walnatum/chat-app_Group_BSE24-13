@@ -1,0 +1,19 @@
+# .github/workflows/hello-world.yml
+name: Hello World Workflow - 3
+
+on: 
+  push:
+    branches:
+      - initial  # Runs the workflow when pushing to the 'main' branch
+  pull_request:
+    branches:
+      - initial  # Runs the workflow for pull requests targeting the 'main' branch
+  workflow_dispatch:  # Allows manual triggering of the workflow
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Print Hello World
+        run: echo "hello world"
