@@ -1,19 +1,22 @@
-# .github/workflows/hello-world.yml
-name: Hello World Workflow - 2
-
-on: 
+name: server-production
+on:
   push:
-    branches:
-      - initial  # Runs the workflow when pushing to the 'main' branch
-  pull_request:
-    branches:
-      - initial  # Runs the workflow for pull requests targeting the 'main' branch
-  workflow_dispatch:  # Allows manual triggering of the workflow
+    branches: [ master ]
+  workflow_dispatch:
 
 jobs:
-  say-hello:
+  deploy:
+    name: Deploy Node.js Backend
     runs-on: ubuntu-latest
+    environment:
+      name: Production
     
     steps:
-      - name: Print Hello World
-        run: echo "hello world"
+      - name: Deploy to Render
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+          RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID_SERVER_PROD }}
+        run: |
+          curl -X POST "https://api.render.com/v1/services/$RENDER_SERVICE_ID/deploys" \
+            -H "Authorization: Bearer $RENDER_API_KEY" \
+            -H "Content-Type: application/json"
